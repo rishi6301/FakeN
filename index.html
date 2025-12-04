@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Advancing Fake News Detection Hybrid Deep Learning</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<noscript><link rel="stylesheet" href="/static/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+			<header id="header">
+				<div class="logo">
+					<span class="icon fa-gem"></span>
+				</div>
+				<div class="content">
+					<div class="inner">
+						<p>WELCOME!!!</p>
+						<h1>Advancing Fake News Detection Hybrid Deep Learning</h1>
+					</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#register">Register</a></li>
+						<li><a href="#login">Login</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			
+			<div id="main">
+				
+				<article id="register">
+					<h2 class="major">Registration</h2>
+					<form method="post" action="register">
+						<div class="fields">
+
+							<div class="field">
+								<label for="name">Name</label>
+								<input type="text" name="name" id="name" />
+							</div>
+
+							<div class="field">
+								<label for="email">Email</label>
+								<input type="text" name="email" id="email" />
+							</div>
+
+							<div class="field">
+								<label for="password">Password</label>
+								<input type="password" name="password" id="password" />
+							</div>
+
+							<div class="field">
+								<label for="c_password">Conform Password</label>
+								<input type="password" name="c_password" id="c_password" />
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Submit" class="primary" /></li>
+							<li><input type="reset" value="Reset" /></li>
+						</ul>
+					</form>
+				</article>
+
+				<article id="login">
+					<h2 class="major">LogIn</h2>
+					<form method="post" action="login">
+						<div class="fields">
+
+							<div class="field">
+								<label for="email">Email</label>
+								<input type="text" name="email" id="email" />
+							</div>
+
+							<div class="field">
+								<label for="password">Password</label>
+								<input type="password" name="password" id="password" />
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Submit" class="primary" /></li>
+							<li><input type="reset" value="Reset" /></li>
+						</ul>
+					</form>
+				</article>
+			</div>
+		</div>
+
+		{% if message %}
+			<script>
+				alert("{{ message }}");
+			</script>
+		{% endif %}
+
+
+		
+
+	<!-- BG -->
+		<div id="bg"></div>
+
+	<!-- Scripts -->
+		<script src="/static/js/jquery.min.js"></script>
+		<script src="/static/js/browser.min.js"></script>
+		<script src="/static/js/breakpoints.min.js"></script>
+		<script src="/static/js/util.js"></script>
+		<script src="/static/js/main.js"></script>
+
+	</body>
+</html>

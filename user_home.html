@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+
+  <title>
+    Giftos
+  </title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/static/css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" href="/templates/home.html">
+          <span>
+            Giftos
+          </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav  ">
+            <li class="nav-item {% if active_page == 'home' %}active{% endif %}">
+              <a class="nav-link" href="{{ url_for('user_home') }}">Home</a>
+            </li>
+            
+            <li class="nav-item {% if active_page == 'cart' %}active{% endif %}">
+              <a class="nav-link" href="{{ url_for('cart') }}">Cart</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('logout')}}">
+                LogOut
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  {% block content %}
+
+    <section class="shop_section layout_padding">
+      <div class="container">
+        <div class="row">
+
+          {% for product in products %}
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <div class="box">
+                <a onclick="updateBrowse('{{ product[0] }}'); return false;" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">                
+                  <div class="img-box">
+                    <img src="{{product[3]}}" alt="">
+                  </div>
+                  <div class="detail-box">
+                    <h6> {{product[1]}}  </h6>
+                    <h6> Price <span> ${{product[2]}} </span> </h6>
+                  </div>
+                  <div class="new"> 
+                    <span> New </span> 
+                  </div>
+                </a>
+              </div>
+            </div>
+
+              <div style="margin-top: 100px;" class="modal fade" id="exampleModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel1">Details</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      <form action="{{url_for('user_home')}}" method="post" enctype="multipart/form-data">
+                        <center>
+                          <input style="display: none;" type="number" name="id" value="{{product[0]}}">
+                          <div class="img-box">
+                            <img src="{{product[3]}}" alt="">
+                          </div>
+                          <div class="detail-box">
+                            <h6> {{product[1]}} </h6>
+                            <h6> Price <span> ${{product[2]}} </span> </h6>
+                          </div>
+                          <div class="new"> 
+                            <span> New </span>
+                          </div>
+                          <div class="detail-box">
+                            <button style="background-color: green; height: 100%; width: 100%; color: white;" type="submit">Add to Cart</button>
+                          </div>
+                        </center>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <script>
+                function updateBrowse(productId) {
+                  // Display the modal
+                  $('#exampleModal' + productId).modal('show');
+
+                  // Send AJAX request to Flask route to update the database
+                  $.ajax({
+                    type: 'POST',
+                    url: '/update_database',
+                    data: { productId: productId },
+                    success: function(response) {
+                      // Handle success response if needed
+                      console.log(response);
+                    },
+                    error: function(error) {
+                      // Handle error if needed
+                      console.error('Error:', error);
+                    }
+                  });
+                }
+              </script>
+
+
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+
+    
+
+  {% endblock %}
+  
+  {% if message %}
+    <script>
+        alert("{{ message }}")        
+    </script>
+  {% endif %}
+
+  <script src="/static/js/jquery-3.4.1.min.js"></script>
+  <script src="/static/js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <script src="/static/js/custom.js"></script>
+
+
+</body>
+
+
+</html>

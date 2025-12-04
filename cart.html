@@ -1,0 +1,98 @@
+{% extends 'user_home.html' %}
+
+{% block content %}
+
+    <section class="shop_section layout_padding">
+      <div class="container">
+        <div class="row">
+
+          {% for product in products %}
+          
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <div class="box">
+                <form action="{{url_for('remove_cart')}}" method="post">
+                  <input style="display: none;" type="number" name="id" value="{{ product[0][0] }}">
+
+                  <div class="img-box">
+                    <img src="{{ product[0][3] }}" alt="">
+                  </div>
+
+                  <div class="detail-box">
+                    <h6>{{ product[0][1] }}</h6>
+                    <h6>
+                      Price
+                      <span>
+                        ${{ product[0][2] }}
+                      </span>
+                    </h6>
+                  </div>
+
+                  <div class="detail-box">
+                    <label for="quantity">Quantity: </label>
+                    <input style="width: 150px;" type="number" id="quantity{{ loop.index }}" name="quantity" value=0 required onchange="updatePrice({{ loop.index }})">
+                  </div>
+
+                  <div class="detail-box">
+                    <button style="background-color: green; height: 100%; width: 100%; color: white;" type="button" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">Purchase</button>
+                  </div>
+
+                  <div class="detail-box">
+                    <button style="background-color: rgb(166, 15, 28); height: 100%; width: 100%; color: white;" type="submit">Remove</button>
+                  </div>
+                </form>
+
+                <div style="margin-top: 150px;" class="modal fade" id="exampleModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel1">Details</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                          </div>
+                          <form action="{{ url_for('cart') }}" method="post" enctype="multipart/form-data">
+                              <div class="modal-body">
+                                  <div class="panel-body">
+                                      <center>
+                                          <img style="height: 200px; width: 200px;" src={{ product[0][3] }} alt="image">
+                                          <h4>Total Price: <span id="modalPrice{{ loop.index }}">$0.00</span></h4>
+                                          <input style="display: none;" type="number" name="product_id">
+                                          <input style="display: none;" type="number" id="quantityHidden{{ loop.index }}" name="quantity" value="0">
+                                          <input style="display: none;" type="number" id="amountHidden{{ loop.index }}" name="amount" value="0">
+                                      </center>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                  <button type="submit" class="btn btn-secondary">Pay</button>
+                              </div>
+                          </form>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <script>
+              function updatePrice(index) {
+                  // Get the quantity input value
+                  var quantity = parseFloat(document.getElementById('quantity' + index).value);
+                  // Get the product price
+                  var price = parseFloat('{{ product[0][2] }}');
+                  // Calculate the total price
+                  var totalPrice = quantity * price;
+                  // Update the price displayed in the modal
+                  document.getElementById('modalPrice' + index).innerText = '$' + totalPrice.toFixed(2);
+                  // Update the hidden input fields with quantity and total price
+                  document.getElementById('quantityHidden' + index).value = quantity;
+                  document.getElementById('amountHidden' + index).value = totalPrice.toFixed(2);
+              }
+            </script>
+
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

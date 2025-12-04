@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block title %} Register page {% endblock %}
+
+{% block content %}
+
+    <form action="{{url_for('register')}}" method="post" class="login-form">
+        <input type="text" name="username" placeholder="username" required/>
+        <input type="email" name="useremail" placeholder="email" required/>
+        <input type="text" name="age" placeholder="Age" required/>
+        <label>
+            <input type="radio" name="gender" value="male" required>
+            Male
+        </label>
+        <label>
+            <input type="radio" name="gender" value="female" required>
+            Female
+        </label>
+        <input type="password" name="password" placeholder="password" required/>
+        <input type="password" name="c_password" placeholder="conform password" required/>
+        <button type="submit">Register</button>
+        <p style="color: black;" class="message">Already registered? <a href="{{url_for('login')}}">Already have an account</a></p>
+    </form>
+
+{% endblock %}

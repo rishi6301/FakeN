@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Advancing Fake News Detection Hybrid Deep Learning</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<noscript><link rel="stylesheet" href="/static/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+			<header id="header">
+				<div class="logo">
+					<span class="icon fa-gem"></span>
+				</div>
+				<div class="content">
+					<div class="inner">
+						<style>
+							h6 {
+							  text-transform: none;
+							  font-weight: normal;
+							  font-size: 1.2em; /* Increase font size by 20% */
+							}
+						  </style>
+						  
+                        {% if prediction %}
+							<h6>Input Text: {{text}}</h6>
+                            <h1>prediction : {{prediction}}</h1>
+                        {% else %}
+                            <p>WELCOME!!!</p>
+                            <h1>Advancing Fake News Detection Hybrid Deep Learning</h1>
+                        {% endif %}
+					</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#prdiction">Predict</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="{{url_for('index')}}">Logout</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			
+			<div id="main">
+
+                <article id="about">
+					<h2 class="major">About</h2>
+                    <p>
+                        In response to the escalating prevalence of misinformation, we are developing a comprehensive web application designed to empower users with the tools to discern fact from fiction. Our platform is engineered to provide rapid, accurate, and transparent fake news detection. At the core of our application lies a sophisticated AI model capable of analyzing news articles with precision. Users can effortlessly submit articles for evaluation, receiving immediate results indicating the likelihood of the content being fake. To foster trust and transparency, our system provides detailed explanations of the factors influencing the detection outcome. This unique approach enables users to critically assess the information presented and make informed decisions. Beyond detection, our web application aims to be an educational resource. By incorporating a knowledge base of common misinformation tactics, users can enhance their ability to identify fake news independently. We envision our platform as a vital tool in the fight against disinformation, empowering individuals and organizations to navigate the complex information landscape with confidence. Our commitment to user experience is paramount. The application's intuitive interface ensures accessibility for users of all technical backgrounds. By combining advanced technology with a user-centric design, we strive to create a platform that is both effective and engaging. Ultimately, our goal is to contribute to a more informed and resilient society by equipping users with the necessary tools to combat the spread of fake news.
+                    </p> </article>
+				
+				<article id="prdiction">
+					<h2 class="major">Upload Text</h2>
+					
+					<form method="post" action="{{url_for('prediction')}}" enctype="multipart/form-data">
+						
+						<div class="fields">
+							<div class="field">
+                                <textarea name="text" id="message" rows="4" placeholder="Text here!"></textarea>
+                            </div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Submit" class="primary" /></li>
+							<li><input type="reset" value="Reset" /></li>
+						</ul>
+					</form>
+				</article>
+
+			</div>
+		</div>
+
+		
+
+
+		
+
+	<!-- BG -->
+		<div id="bg"></div>
+
+	<!-- Scripts -->
+		<script src="/static/js/jquery.min.js"></script>
+		<script src="/static/js/browser.min.js"></script>
+		<script src="/static/js/breakpoints.min.js"></script>
+		<script src="/static/js/util.js"></script>
+		<script src="/static/js/main.js"></script>
+
+	</body>
+</html>
